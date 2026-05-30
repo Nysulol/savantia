@@ -1,0 +1,17 @@
+-- Liste d'attente Savantia (à exécuter dans Supabase → SQL Editor)
+create table if not exists public.waitlist (
+  id uuid primary key default gen_random_uuid(),
+  email text not null,
+  created_at timestamptz not null default now(),
+  constraint waitlist_email_unique unique (email)
+);
+
+alter table public.waitlist enable row level security;
+
+create policy "waitlist_insert_anon"
+  on public.waitlist
+  for insert
+  to anon, authenticated
+  with check (true);
+
+-- Lecture réservée au tableau de bord Supabase (service role / admin)
