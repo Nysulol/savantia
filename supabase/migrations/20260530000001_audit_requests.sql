@@ -1,3 +1,4 @@
+-- Table demandes d'audit (idempotent : safe à réexécuter)
 create table if not exists public.audit_requests (
   id uuid primary key default gen_random_uuid(),
   firstname text not null,
@@ -13,6 +14,8 @@ create table if not exists public.audit_requests (
 );
 
 alter table public.audit_requests enable row level security;
+
+drop policy if exists "audit_requests_insert_anon" on public.audit_requests;
 
 create policy "audit_requests_insert_anon"
   on public.audit_requests
