@@ -1,21 +1,19 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Inter } from "next/font/google";
+import { IconSprite } from "@/components/landing/icon-sprite";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const inter = Inter({
   subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800"],
+  variable: "--font-inter",
+  display: "swap",
 });
 
 export const metadata: Metadata = {
-  title: "Savantia — Bientôt disponible",
+  title: "Savantia — Automatisez vos emails et votre SAV",
   description:
-    "Rejoignez la liste d'attente Savantia. Landing page Next.js, Supabase et Vercel.",
+    "Savantia automatise vos emails et votre support client. Réponses en minutes, 24/7, sans recruter. Audit gratuit de 30 minutes.",
 };
 
 export default function RootLayout({
@@ -24,11 +22,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html
-      lang="fr"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
-    >
-      <body className="min-h-full flex flex-col">{children}</body>
+    <html lang="fr" className={inter.variable}>
+      <body className={inter.className}>
+        <IconSprite />
+        {children}
+      </body>
     </html>
   );
 }
